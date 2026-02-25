@@ -1,0 +1,72 @@
+{
+  "agent_name": "Discovery Coordinator",
+  "agent_id": "699e51bb03e99fdcfa03917a",
+  "description": "Coordinates the competitor content discovery workflow \u2014 routes the competitor list to research sub-agents, receives all raw findings, passes them to classifier, and aggregates the final classified dataset into a structured weekly Excel batch for review",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "weekly_batch": {
+      "batch_date": "string",
+      "total_findings": "number",
+      "auto_approved_count": "number",
+      "flagged_count": "number",
+      "competitor_breakdown": "string",
+      "source_distribution": "string"
+    },
+    "classified_findings": [
+      {
+        "competitor_name": "string",
+        "title": "string",
+        "description": "string",
+        "url": "string",
+        "source_name": "string",
+        "site_type": "string",
+        "engagement_type": "string",
+        "media_type": "string",
+        "confidence_score": "number",
+        "status": "string",
+        "flag_reason": "string",
+        "published_date": "string",
+        "content_snippet": "string"
+      }
+    ],
+    "summary": "string"
+  },
+  "example_response": {
+    "weekly_batch": {
+      "batch_date": "sample string",
+      "total_findings": 0,
+      "auto_approved_count": 0,
+      "flagged_count": 0,
+      "competitor_breakdown": "sample string",
+      "source_distribution": "sample string"
+    },
+    "classified_findings": [
+      {
+        "competitor_name": "sample string",
+        "title": "sample string",
+        "description": "sample string",
+        "url": "sample string",
+        "source_name": "sample string",
+        "site_type": "sample string",
+        "engagement_type": "sample string",
+        "media_type": "sample string",
+        "confidence_score": 0,
+        "status": "sample string",
+        "flag_reason": "sample string",
+        "published_date": "sample string",
+        "content_snippet": "sample string"
+      }
+    ],
+    "summary": "sample string"
+  },
+  "has_module_outputs": true,
+  "module_outputs_example": {
+    "artifact_files": [
+      {
+        "file_url": "https://example.com/file.pdf"
+      }
+    ]
+  }
+}

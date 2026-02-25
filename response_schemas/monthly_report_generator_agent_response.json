@@ -1,0 +1,64 @@
+{
+  "agent_name": "Monthly Report Generator Agent",
+  "agent_id": "699e51cecc6fce723cd133a3",
+  "description": "Analyzes all accumulated approved findings from the selected month, generates a comprehensive PDF report containing executive summary of AI competitive landscape, key trend analysis, and detailed per-competitor overviews with activity breakdowns and source distribution",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "report": {
+      "month": "string",
+      "year": "string",
+      "executive_summary": "string",
+      "landscape_overview": "string",
+      "competitor_analyses": [
+        {
+          "competitor_name": "string",
+          "total_findings": "number",
+          "activity_summary": "string",
+          "key_developments": "string",
+          "source_distribution": "string",
+          "engagement_distribution": "string",
+          "notable_excerpts": "string"
+        }
+      ],
+      "trend_analysis": "string",
+      "recommendations": "string",
+      "total_findings_analyzed": "number",
+      "total_competitors": "number"
+    },
+    "summary": "string"
+  },
+  "example_response": {
+    "report": {
+      "month": "sample string",
+      "year": "sample string",
+      "executive_summary": "sample string",
+      "landscape_overview": "sample string",
+      "competitor_analyses": [
+        {
+          "competitor_name": "sample string",
+          "total_findings": 0,
+          "activity_summary": "sample string",
+          "key_developments": "sample string",
+          "source_distribution": "sample string",
+          "engagement_distribution": "sample string",
+          "notable_excerpts": "sample string"
+        }
+      ],
+      "trend_analysis": "sample string",
+      "recommendations": "sample string",
+      "total_findings_analyzed": 0,
+      "total_competitors": 0
+    },
+    "summary": "sample string"
+  },
+  "has_module_outputs": true,
+  "module_outputs_example": {
+    "artifact_files": [
+      {
+        "file_url": "https://example.com/file.pdf"
+      }
+    ]
+  }
+}

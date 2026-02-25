@@ -1,0 +1,40 @@
+{
+  "agent_name": "Social & Conference Research Agent",
+  "agent_id": "699e519727b6ab8cda741a75",
+  "description": "Scans social media platforms and conference/event listings for AI-related mentions, presentations, and thought leadership by specified competitors — returns raw findings with source details and engagement data",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "findings": [
+      {
+        "competitor_name": "string",
+        "title": "string",
+        "description": "string",
+        "url": "string",
+        "source_name": "string",
+        "site_type": "string",
+        "published_date": "string",
+        "content_snippet": "string",
+        "engagement_data": "string"
+      }
+    ],
+    "summary": "string"
+  },
+  "example_response": {
+    "findings": [
+      {
+        "competitor_name": "sample string",
+        "title": "sample string",
+        "description": "sample string",
+        "url": "sample string",
+        "source_name": "sample string",
+        "site_type": "sample string",
+        "published_date": "sample string",
+        "content_snippet": "sample string",
+        "engagement_data": "sample string"
+      }
+    ],
+    "summary": "sample string"
+  }
+}

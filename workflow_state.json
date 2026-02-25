@@ -1,0 +1,86 @@
+{
+  "project_name": "AI Competitor Intelligence Hub",
+  "created_at": "2026-02-25",
+  "agents": {
+    "web_media_agent": {
+      "agent_id": "699e51974fb440a07118c077",
+      "name": "Web & Media Research Agent",
+      "type": "sub-agent",
+      "provider": "perplexity",
+      "model": "sonar-pro",
+      "file_output": false,
+      "image_output": false,
+      "voice": false,
+      "response_schema": "response_schemas/web_media_research_agent_response.json"
+    },
+    "social_conference_agent": {
+      "agent_id": "699e519727b6ab8cda741a75",
+      "name": "Social & Conference Research Agent",
+      "type": "sub-agent",
+      "provider": "perplexity",
+      "model": "sonar-pro",
+      "file_output": false,
+      "image_output": false,
+      "voice": false,
+      "response_schema": "response_schemas/social_conference_research_agent_response.json"
+    },
+    "content_classifier": {
+      "agent_id": "699e5198837b5fc60979635c",
+      "name": "Content Classifier Agent",
+      "type": "sub-agent",
+      "provider": "openai",
+      "model": "gpt-4.1",
+      "file_output": false,
+      "image_output": false,
+      "voice": false,
+      "response_schema": "response_schemas/content_classifier_agent_response.json"
+    },
+    "discovery_coordinator": {
+      "agent_id": "699e51bb03e99fdcfa03917a",
+      "name": "Discovery Coordinator",
+      "type": "manager",
+      "provider": "openai",
+      "model": "gpt-4.1",
+      "file_output": true,
+      "image_output": false,
+      "voice": false,
+      "managed_agents": [
+        "699e51974fb440a07118c077",
+        "699e519727b6ab8cda741a75",
+        "699e5198837b5fc60979635c"
+      ],
+      "response_schema": "response_schemas/discovery_coordinator_response.json"
+    },
+    "monthly_report_agent": {
+      "agent_id": "699e51cecc6fce723cd133a3",
+      "name": "Monthly Report Generator Agent",
+      "type": "independent",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5",
+      "file_output": true,
+      "image_output": false,
+      "voice": false,
+      "response_schema": "response_schemas/monthly_report_generator_agent_response.json"
+    }
+  },
+  "workflow": {
+    "nodes": [
+      {"id": "input_node", "type": "Input", "label": "User Input", "nodeCategory": "input"},
+      {"id": "discovery_coordinator", "type": "Agent", "label": "Discovery Coordinator", "nodeCategory": "agent"},
+      {"id": "web_media_agent", "type": "Agent", "label": "Web & Media Research Agent", "nodeCategory": "agent"},
+      {"id": "social_conference_agent", "type": "Agent", "label": "Social & Conference Research Agent", "nodeCategory": "agent"},
+      {"id": "content_classifier", "type": "Agent", "label": "Content Classifier Agent", "nodeCategory": "agent"},
+      {"id": "monthly_report_agent", "type": "Agent", "label": "Monthly Report Generator", "nodeCategory": "agent"},
+      {"id": "output_node", "type": "Output", "label": "Output", "nodeCategory": "end"}
+    ],
+    "edges": [
+      {"source": "input_node", "target": "discovery_coordinator"},
+      {"source": "discovery_coordinator", "target": "web_media_agent"},
+      {"source": "discovery_coordinator", "target": "social_conference_agent"},
+      {"source": "discovery_coordinator", "target": "content_classifier"},
+      {"source": "input_node", "target": "monthly_report_agent"},
+      {"source": "discovery_coordinator", "target": "output_node"},
+      {"source": "monthly_report_agent", "target": "output_node"}
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "agent_name": "Content Classifier Agent",
+  "agent_id": "699e5198837b5fc60979635c",
+  "description": "Receives all raw findings from research agents and classifies each with site type, engagement type, owned vs earned media, relevance confidence score. Auto-approves items with confidence >= 70% and flags items below 70% for manual review with flag reasons",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "classified_findings": [
+      {
+        "competitor_name": "string",
+        "title": "string",
+        "description": "string",
+        "url": "string",
+        "source_name": "string",
+        "site_type": "string",
+        "engagement_type": "string",
+        "media_type": "string",
+        "confidence_score": "number",
+        "status": "string",
+        "flag_reason": "string",
+        "published_date": "string",
+        "content_snippet": "string"
+      }
+    ],
+    "total_findings": "number",
+    "auto_approved_count": "number",
+    "flagged_count": "number",
+    "summary": "string"
+  },
+  "example_response": {
+    "classified_findings": [
+      {
+        "competitor_name": "sample string",
+        "title": "sample string",
+        "description": "sample string",
+        "url": "sample string",
+        "source_name": "sample string",
+        "site_type": "sample string",
+        "engagement_type": "sample string",
+        "media_type": "sample string",
+        "confidence_score": 0,
+        "status": "sample string",
+        "flag_reason": "sample string",
+        "published_date": "sample string",
+        "content_snippet": "sample string"
+      }
+    ],
+    "total_findings": 0,
+    "auto_approved_count": 0,
+    "flagged_count": 0,
+    "summary": "sample string"
+  }
+}
