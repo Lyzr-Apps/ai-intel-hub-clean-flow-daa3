@@ -133,13 +133,16 @@ const SAMPLE_FINDINGS: Finding[] = [
 const SAMPLE_REPORTS: StoredReport[] = [
   {
     id: 'sr1', month: 'January', year: '2025', generatedDate: '2025-02-01', totalFindings: 34, totalCompetitors: 5,
-    executiveSummary: 'January 2025 saw heightened activity across the AI competitive landscape. OpenAI maintained its lead with significant developer tooling updates, while Google DeepMind pushed forward with enterprise Gemini offerings. Anthropic continued its safety-focused approach, and Mistral AI made waves in the European market.',
-    landscapeOverview: 'The competitive landscape remains dynamic with five major players vying for enterprise and developer mindshare. Key themes include multimodal capabilities, safety/alignment research, and pricing competition.',
-    trendAnalysis: 'Three dominant trends emerged: (1) Shift toward mixture-of-experts architectures for efficiency, (2) Increased focus on enterprise-specific deployments, (3) Growing emphasis on AI safety and regulation preparedness.',
-    recommendations: 'Focus competitive monitoring on enterprise pricing strategies and API capability gaps. Increase tracking of regulatory developments in EU and US markets. Monitor partnership announcements closely for market positioning signals.',
+    executiveSummary: 'OpenAI signaled major API pricing restructuring aimed at enterprise volume deals\nGoogle DeepMind launched Gemini 2.5 for enterprise with advanced multimodal reasoning\nAnthropic published updated Constitutional AI framework emphasizing harmlessness\nMistral AI closed $600M Series C at $6B valuation, signaling aggressive expansion\nCohere positioned Command R+ as enterprise retrieval leader with disputed benchmarks\nCross-industry shift toward mixture-of-experts architectures accelerating',
+    landscapeOverview: 'Five major players competing for enterprise and developer mindshare across multimodal capabilities, safety research, and pricing.',
+    trendAnalysis: 'Shift toward mixture-of-experts architectures for cost-efficient inference at scale\nEnterprise-specific deployments becoming primary revenue driver across all competitors\nAI safety and regulation preparedness emerging as competitive differentiator\nPartnership-driven go-to-market strategies overtaking direct sales in healthcare and pharma\nOpen-weight model competition intensifying between Mistral, Meta, and emerging players',
+    recommendations: 'Monitor enterprise pricing strategies closely -- API price wars likely in Q2\nTrack EU AI Act compliance timelines as regulatory readiness becomes a selling point\nDeepen coverage of pharma/healthcare AI partnerships -- fastest growing vertical\nWatch for Mistral and Cohere enterprise expansion announcements post-funding\nEstablish benchmarking framework to independently verify competitor performance claims',
     competitorAnalyses: [
-      { competitor_name: 'OpenAI', total_findings: 12, activity_summary: 'High activity with product launches and developer outreach', key_developments: 'GPT-5 hints, API restructuring, DevDay announcements', source_distribution: 'Research: 3, News: 5, Blog: 2, Conference: 2', engagement_distribution: 'Product Launch: 4, Publication: 3, Event: 3, Partnership: 2', notable_excerpts: 'Fundamental changes to API pricing signal a shift toward volume-based enterprise deals.' },
-      { competitor_name: 'Google DeepMind', total_findings: 9, activity_summary: 'Strong research output combined with enterprise push', key_developments: 'Gemini 2.5 enterprise, AlphaFold 3 partnerships', source_distribution: 'Research: 4, News: 3, Blog: 2', engagement_distribution: 'Product Launch: 2, Publication: 4, Partnership: 3', notable_excerpts: 'DeepMind continues to bridge research and commercial applications effectively.' },
+      { competitor_name: 'OpenAI', total_findings: 12, activity_summary: 'High activity with product launches and developer outreach across multiple channels.', key_developments: 'GPT-5 architecture hints surfaced in arXiv research paper co-authored by OpenAI team\nAPI pricing restructuring announced at DevDay targeting enterprise volume deals\nNew developer tools including function calling v2 and structured outputs\nStrategic partnership with enterprise SaaS providers for embedded AI', source_distribution: 'Research: 3, News: 5, Blog: 2, Conference: 2', engagement_distribution: 'Product Launch: 4, Publication: 3, Event: 3, Partnership: 2', notable_excerpts: 'Fundamental changes to API pricing signal a shift toward volume-based enterprise deals.' },
+      { competitor_name: 'Google DeepMind', total_findings: 9, activity_summary: 'Strong research output combined with aggressive enterprise Gemini push.', key_developments: 'Gemini 2.5 launched for enterprise with improved multimodal reasoning capabilities\nAlphaFold 3 partnership with Eli Lilly for clinical drug discovery pipelines\nNew Gemma open-weight models released targeting developer community', source_distribution: 'Research: 4, News: 3, Blog: 2', engagement_distribution: 'Product Launch: 2, Publication: 4, Partnership: 3', notable_excerpts: 'DeepMind continues to bridge research and commercial applications effectively.' },
+      { competitor_name: 'Anthropic', total_findings: 6, activity_summary: 'Continued safety-focused positioning with Constitutional AI updates.', key_developments: 'Updated Constitutional AI training guidelines published\nExpanded enterprise partnerships in financial services\nNew safety benchmarking framework proposed to industry', source_distribution: 'Research: 3, Blog: 2, News: 1', engagement_distribution: 'Publication: 3, Partnership: 2, Thought Leadership: 1', notable_excerpts: 'Our updated constitutional approach focuses on scalable oversight mechanisms.' },
+      { competitor_name: 'Mistral AI', total_findings: 4, activity_summary: 'Major funding round signals aggressive expansion into enterprise markets.', key_developments: '$600M Series C at $6B valuation closed\nEuropean enterprise partnerships expanding rapidly\nNew Mistral Large model targeting enterprise workloads', source_distribution: 'News: 3, Blog: 1', engagement_distribution: 'Funding: 1, Product Launch: 1, Partnership: 2', notable_excerpts: 'The Paris-based AI startup has reportedly closed its largest funding round to date.' },
+      { competitor_name: 'Cohere', total_findings: 3, activity_summary: 'Positioning as enterprise retrieval specialist with disputed benchmark claims.', key_developments: 'Command R+ benchmark claims against GPT-4 on retrieval tasks\nNew enterprise deployment options for on-premises installations\nPartnered with consulting firms for enterprise AI adoption', source_distribution: 'Blog: 2, News: 1', engagement_distribution: 'Product Update: 2, Partnership: 1', notable_excerpts: 'Command R+ demonstrates superior performance on enterprise retrieval benchmarks -- methodology under review.' },
     ],
     pdfUrl: '', summary: 'January 2025 competitive intelligence report covering 34 findings across 5 competitors.'
   },
@@ -877,12 +880,12 @@ function FindingsScreen({
                 <TableRow>
                   <TableHead>Competitor</TableHead>
                   <TableHead className="min-w-[250px]">Title / Description</TableHead>
+                  <TableHead>Date</TableHead>
                   <TableHead>Source</TableHead>
                   <TableHead>Type</TableHead>
                   <TableHead>Engagement</TableHead>
                   <TableHead>Score</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -906,6 +909,7 @@ function FindingsScreen({
                             )}
                           </button>
                         </TableCell>
+                        <TableCell className="text-xs text-muted-foreground whitespace-nowrap">{formatDate(f.published_date)}</TableCell>
                         <TableCell className="text-xs text-muted-foreground">{f.site_type ?? 'N/A'}</TableCell>
                         <TableCell className="text-xs text-muted-foreground">{f.media_type ?? 'N/A'}</TableCell>
                         <TableCell className="text-xs text-muted-foreground">{f.engagement_type ?? 'N/A'}</TableCell>
@@ -915,7 +919,6 @@ function FindingsScreen({
                           </span>
                         </TableCell>
                         <TableCell><FindingStatusBadge status={f.status ?? ''} /></TableCell>
-                        <TableCell className="text-xs text-muted-foreground whitespace-nowrap">{formatDate(f.published_date)}</TableCell>
                         <TableCell className="text-right">
                           {isFlagged && (
                             <div className="flex items-center justify-end gap-1">
@@ -1064,115 +1067,173 @@ function ReportsScreen({
           </CardContent>
         </Card>
       ) : viewingReport ? (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setViewingReport(null)}>
-              Back to Reports
-            </Button>
-            <Separator orientation="vertical" className="h-5" />
-            <span className="text-sm text-muted-foreground">{viewingReport.month} {viewingReport.year} Report</span>
+        <div className="space-y-5">
+          {/* Header Row */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="sm" onClick={() => setViewingReport(null)}>
+                <HiOutlineChevronRight className="w-4 h-4 rotate-180 mr-1" />
+                Back
+              </Button>
+              <Separator orientation="vertical" className="h-5" />
+              <h3 className="text-lg font-bold text-foreground">{viewingReport.month} {viewingReport.year} -- Competitive Intelligence Report</h3>
+            </div>
+            {viewingReport.pdfUrl && (
+              <Button variant="outline" size="sm" asChild>
+                <a href={viewingReport.pdfUrl} target="_blank" rel="noopener noreferrer">
+                  <HiOutlineDocumentArrowDown className="w-4 h-4 mr-1" />
+                  Download PDF
+                </a>
+              </Button>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <MetricTile icon={<HiOutlineMagnifyingGlass className="w-5 h-5" />} label="Findings Analyzed" value={viewingReport.totalFindings ?? 0} />
-            <MetricTile icon={<HiOutlineUserGroup className="w-5 h-5" />} label="Competitors Covered" value={viewingReport.totalCompetitors ?? 0} />
-            <MetricTile icon={<HiOutlineClock className="w-5 h-5" />} label="Generated" value={formatDate(viewingReport.generatedDate)} />
+          {/* Quick Stats Bar */}
+          <div className="flex items-center gap-6 px-4 py-3 bg-secondary/50 rounded-lg">
+            <div className="text-sm"><span className="font-semibold text-foreground">{viewingReport.totalFindings ?? 0}</span> <span className="text-muted-foreground">findings analyzed</span></div>
+            <Separator orientation="vertical" className="h-4" />
+            <div className="text-sm"><span className="font-semibold text-foreground">{viewingReport.totalCompetitors ?? 0}</span> <span className="text-muted-foreground">competitors</span></div>
+            <Separator orientation="vertical" className="h-4" />
+            <div className="text-sm text-muted-foreground">Generated {formatDate(viewingReport.generatedDate)}</div>
           </div>
 
-          <Tabs defaultValue="summary" className="w-full">
-            <TabsList>
-              <TabsTrigger value="summary">Executive Summary</TabsTrigger>
-              <TabsTrigger value="landscape">Landscape</TabsTrigger>
-              <TabsTrigger value="competitors">Competitors</TabsTrigger>
-              <TabsTrigger value="trends">Trends & Recs</TabsTrigger>
-            </TabsList>
-            <TabsContent value="summary" className="mt-4">
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-3">Executive Summary</h3>
-                  {renderMarkdown(viewingReport.executiveSummary ?? '')}
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="landscape" className="mt-4">
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-3">Landscape Overview</h3>
-                  {renderMarkdown(viewingReport.landscapeOverview ?? '')}
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="competitors" className="mt-4">
+          {/* Executive Summary */}
+          <Card>
+            <CardContent className="p-6">
+              <h4 className="text-base font-bold text-foreground mb-3 flex items-center gap-2">
+                <HiOutlineBolt className="w-4 h-4 text-primary" />
+                Executive Summary
+              </h4>
+              <ul className="space-y-2">
+                {(viewingReport.executiveSummary ?? '').split(/\n|(?:\.\s+)/).filter((s: string) => s.trim().length > 10).map((point: string, i: number) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <span>{point.trim().replace(/^[-*]\s*/, '').replace(/\.$/, '')}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Key Trends */}
+          {viewingReport.trendAnalysis && (
+            <Card>
+              <CardContent className="p-6">
+                <h4 className="text-base font-bold text-foreground mb-3 flex items-center gap-2">
+                  <HiOutlineChartBarSquare className="w-4 h-4 text-primary" />
+                  Key Trends
+                </h4>
+                <ul className="space-y-2">
+                  {(viewingReport.trendAnalysis).split(/\n|(?:\.\s+)/).filter((s: string) => s.trim().length > 10).map((point: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                      <span>{point.trim().replace(/^[-*]\s*/, '').replace(/\.$/, '')}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Per-Competitor Sections */}
+          <div>
+            <h4 className="text-base font-bold text-foreground mb-3 flex items-center gap-2">
+              <HiOutlineUserGroup className="w-4 h-4 text-primary" />
+              Competitor Summaries
+            </h4>
+            {Array.isArray(viewingReport.competitorAnalyses) && viewingReport.competitorAnalyses.length > 0 ? (
               <div className="space-y-4">
-                {Array.isArray(viewingReport.competitorAnalyses) && viewingReport.competitorAnalyses.length > 0 ? (
-                  viewingReport.competitorAnalyses.map((ca, idx) => (
+                {viewingReport.competitorAnalyses.map((ca, idx) => {
+                  const compFindings = findings.filter((f) =>
+                    (f.competitor_name ?? '').toLowerCase() === (ca?.competitor_name ?? '').toLowerCase() &&
+                    (f.status ?? '').toLowerCase().includes('approved')
+                  )
+                  return (
                     <Card key={idx}>
-                      <CardHeader className="pb-2">
-                        <div className="flex items-center justify-between">
-                          <CardTitle className="text-base">{ca?.competitor_name ?? 'Unknown Competitor'}</CardTitle>
-                          <Badge variant="outline">{ca?.total_findings ?? 0} findings</Badge>
+                      <CardContent className="p-5">
+                        <div className="flex items-center justify-between mb-3">
+                          <h5 className="text-sm font-bold text-foreground">{ca?.competitor_name ?? 'Unknown'}</h5>
+                          <Badge variant="outline" className="text-xs">{ca?.total_findings ?? 0} findings</Badge>
                         </div>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
+
+                        {/* Activity bullets */}
                         {ca?.activity_summary && (
-                          <div>
-                            <p className="text-xs font-medium text-muted-foreground uppercase mb-1">Activity Summary</p>
-                            <p className="text-sm text-foreground">{ca.activity_summary}</p>
-                          </div>
+                          <p className="text-sm text-muted-foreground mb-3">{ca.activity_summary}</p>
                         )}
+
+                        {/* Key developments as bullets */}
                         {ca?.key_developments && (
-                          <div>
-                            <p className="text-xs font-medium text-muted-foreground uppercase mb-1">Key Developments</p>
-                            {renderMarkdown(ca.key_developments)}
+                          <div className="mb-3">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Key Developments</p>
+                            <ul className="space-y-1.5">
+                              {ca.key_developments.split(/\n/).filter((s: string) => s.trim().length > 3).map((dev: string, di: number) => (
+                                <li key={di} className="flex items-start gap-2 text-sm text-foreground">
+                                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
+                                  <span>{dev.trim().replace(/^[-*]\s*/, '')}</span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         )}
-                        {ca?.source_distribution && (
+
+                        {/* Linked relevant content */}
+                        {compFindings.length > 0 && (
                           <div>
-                            <p className="text-xs font-medium text-muted-foreground uppercase mb-1">Source Distribution</p>
-                            <p className="text-sm text-muted-foreground">{ca.source_distribution}</p>
-                          </div>
-                        )}
-                        {ca?.engagement_distribution && (
-                          <div>
-                            <p className="text-xs font-medium text-muted-foreground uppercase mb-1">Engagement Distribution</p>
-                            <p className="text-sm text-muted-foreground">{ca.engagement_distribution}</p>
-                          </div>
-                        )}
-                        {ca?.notable_excerpts && (
-                          <div>
-                            <p className="text-xs font-medium text-muted-foreground uppercase mb-1">Notable Excerpts</p>
-                            <p className="text-sm text-foreground italic">&ldquo;{ca.notable_excerpts}&rdquo;</p>
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Relevant Content</p>
+                            <div className="space-y-1.5">
+                              {compFindings.slice(0, 8).map((cf) => (
+                                <div key={cf.id} className="flex items-start gap-2 text-sm">
+                                  <HiOutlineGlobeAlt className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                                  <div className="min-w-0">
+                                    {cf.url ? (
+                                      <a href={cf.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+                                        {cf.title || 'View source'}
+                                      </a>
+                                    ) : (
+                                      <span className="text-foreground font-medium">{cf.title || 'Untitled'}</span>
+                                    )}
+                                    <span className="text-muted-foreground ml-1.5 text-xs">
+                                      {cf.source_name ? `(${cf.source_name})` : ''} {cf.published_date ? formatDate(cf.published_date) : ''}
+                                    </span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         )}
                       </CardContent>
                     </Card>
-                  ))
-                ) : (
-                  <Card>
-                    <CardContent className="p-6 text-center text-sm text-muted-foreground">
-                      No competitor analyses available for this report.
-                    </CardContent>
-                  </Card>
-                )}
+                  )
+                })}
               </div>
-            </TabsContent>
-            <TabsContent value="trends" className="mt-4">
-              <div className="space-y-4">
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-foreground mb-3">Trend Analysis</h3>
-                    {renderMarkdown(viewingReport.trendAnalysis ?? '')}
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-foreground mb-3">Recommendations</h3>
-                    {renderMarkdown(viewingReport.recommendations ?? '')}
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-          </Tabs>
+            ) : (
+              <Card>
+                <CardContent className="p-6 text-center text-sm text-muted-foreground">
+                  No competitor analyses available for this report.
+                </CardContent>
+              </Card>
+            )}
+          </div>
+
+          {/* Recommendations */}
+          {viewingReport.recommendations && (
+            <Card>
+              <CardContent className="p-6">
+                <h4 className="text-base font-bold text-foreground mb-3 flex items-center gap-2">
+                  <HiOutlineClipboardDocumentCheck className="w-4 h-4 text-primary" />
+                  Recommendations
+                </h4>
+                <ul className="space-y-2">
+                  {(viewingReport.recommendations).split(/\n|(?:\.\s+)/).filter((s: string) => s.trim().length > 10).map((rec: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                      <span>{rec.trim().replace(/^[-*]\s*/, '').replace(/\.$/, '')}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
         </div>
       ) : (
         <div className="space-y-4">
@@ -1409,7 +1470,7 @@ export default function Page() {
         snippet: f.content_snippet,
       }))
 
-      const message = `Generate a monthly competitive intelligence report for ${month} ${year}. Analyze these approved findings: ${JSON.stringify(findingsSummary)}. Provide executive summary, trend analysis, and per-competitor overviews.`
+      const message = `Generate a monthly competitive intelligence report for ${month} ${year}. Analyze these approved findings: ${JSON.stringify(findingsSummary)}. Format the report as an executive brief using concise bullet points throughout. The executive_summary should be 4-6 bullet points highlighting the most significant competitive developments. The trend_analysis should be 3-5 bullet points on key industry trends. For each competitor_analyses entry, provide: a short activity_summary sentence, key_developments as 3-5 bullet points (separated by newlines), and notable_excerpts as relevant quotes. The recommendations should be 3-5 actionable bullet points. Keep all text concise and scannable.`
 
       const result = await callAIAgent(message, REPORT_AGENT_ID)
 
