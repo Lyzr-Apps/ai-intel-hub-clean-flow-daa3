@@ -338,15 +338,15 @@ function SidebarNav({ activeScreen, onNavigate }: { activeScreen: ScreenName; on
   ]
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-card border-r border-border/40 flex flex-col min-h-screen">
-      <div className="p-6 border-b border-border/40">
+    <aside className="w-64 flex-shrink-0 bg-sidebar border-r border-sidebar-border flex flex-col min-h-screen">
+      <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-            <HiOutlineBolt className="w-5 h-5 text-primary-foreground" />
+          <div className="w-9 h-9 rounded-lg bg-sidebar-primary flex items-center justify-center">
+            <HiOutlineBolt className="w-5 h-5 text-sidebar-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-sm font-semibold tracking-wide text-foreground">Competitor</h1>
-            <p className="text-xs text-muted-foreground">Intelligence Hub</p>
+            <h1 className="text-sm font-semibold tracking-wide text-sidebar-foreground">Competitor</h1>
+            <p className="text-xs text-sidebar-foreground/60">Intelligence Hub</p>
           </div>
         </div>
       </div>
@@ -359,8 +359,8 @@ function SidebarNav({ activeScreen, onNavigate }: { activeScreen: ScreenName; on
             className={cn(
               'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
               activeScreen === item.key
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm'
+                : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground'
             )}
           >
             {item.icon}
@@ -369,10 +369,10 @@ function SidebarNav({ activeScreen, onNavigate }: { activeScreen: ScreenName; on
         ))}
       </nav>
 
-      <div className="p-4 border-t border-border/40">
-        <div className="bg-secondary/60 rounded-lg p-3">
-          <p className="text-xs font-medium text-foreground mb-1">Powered by AI</p>
-          <p className="text-xs text-muted-foreground leading-relaxed">Discovery Coordinator and Report Generator agents</p>
+      <div className="p-4 border-t border-sidebar-border">
+        <div className="bg-sidebar-accent rounded-lg p-3">
+          <p className="text-xs font-medium text-sidebar-foreground mb-1">Powered by AI</p>
+          <p className="text-xs text-sidebar-foreground/60 leading-relaxed">Discovery Coordinator and Report Generator agents</p>
         </div>
       </div>
     </aside>
